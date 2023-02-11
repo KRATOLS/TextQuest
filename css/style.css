@@ -133,3 +133,22 @@ body {
     text-align: center;
     font-size: 16px;
 }
+/*Страница для чтения*/
+.text__reading .app__inner{
+    align-items: center;
+    height: 85%;
+}
+.text_page {
+    overflow-y: auto;
+    width: 70%;
+    margin-bottom: 30px;
+}
+.text_part {
+    text-align: center;
+    font-size: 24px;
+}
+.switch__pages .btn {
+    width: 120px;
+    height: 40px;
+    background-color: red;
+}

@@ -11,7 +11,7 @@
 <body>
     <div class="main">
         
-        <div class="app main__menu" v-show="showMainMenu">
+        <!-- <div class="app main__menu" v-show="showMainMenu">
             <div class="app__header">
                 <h1>Gothic Quest</h1>
             </div>
@@ -41,19 +41,19 @@
                     <h2>Класс персонажа</h2>
                     <div class="class__icons">
                         <div class="class__warrior">
-                            <button class="btn classname_btn" @click="char_properties.class_name='воин'">
+                            <button class="btn classname_btn" @click="char_properties.class_name='warrior'">
                                 <p class="class_name">Воин</p>
                                 <img src="fonts/sword.svg" alt="">
                             </button>
                         </div>
-                        <div class="class rogue" @click="char_properties.class_name='разбойник'">
+                        <div class="class rogue" @click="char_properties.class_name='rogue'">
                             <button class="btn classname_btn">
                                 <p class="class_name">Разбойник</p>
                                 <img src="fonts/archer.svg" alt="">
                             </button>
                         </div>
                         <div class="class__mage">
-                            <button class="btn classname_btn" @click="char_properties.class_name='маг'">
+                            <button class="btn classname_btn" @click="char_properties.class_name='mage'">
                                 <p class="class_name">Маг</p>
                                 <img src="fonts/shuriken.svg" alt="">
                             </button>
@@ -121,10 +121,33 @@
                             <p>Готово</p>
                         </button>
                     </div>
-                </div>
+                </div>              
 
             </div>
-        </div>
+        </div> -->
+
+        <div class="app text__reading">
+            <div class="app__header">
+                <h1>Лес теней</h1>
+            </div>
+            <div class="app__inner">
+                <div class="text_page">
+                    <p class="text_part">
+                        Вы член шайки отчаянных головорезов известных в широких кругах, как "Кровавые клинки". До вашего предводителя дошли о том, что весьма богатый торговый караван должен пересечь границы Леса теней, планируя тем самым сократить маршрут. Вы тщательно спланировали засаду, и вам  в этом деле отведена роль разведчика, который должен заблаговременно предупредить о приближении цели. 
+                    </p>
+                    <p class="text_part">
+                        Вы член шайки отчаянных головорезов известных в широких кругах, как "Кровавые клинки". До вашего предводителя дошли о том, что весьма богатый торговый караван должен пересечь границы Леса теней, планируя тем самым сократить маршрут. Вы тщательно спланировали засаду, и вам  в этом деле отведена роль разведчика, который должен заблаговременно предупредить о приближении цели. 
+                    </p>
+                    <p class="text_part">
+                        Вы член шайки отчаянных головорезов известных в широких кругах, как "Кровавые клинки". До вашего предводителя дошли о том, что весьма богатый торговый караван должен пересечь границы Леса теней, планируя тем самым сократить маршрут. Вы тщательно спланировали засаду, и вам  в этом деле отведена роль разведчика, который должен заблаговременно предупредить о приближении цели. 
+                    </p>
+                </div>
+                <div class="switch__pages">
+                    <button class="btn next_page">Назад</button>
+                    <button class="btn previous_page">Дальше</button>
+                </div>
+            </div>
+        </div> 
 
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
