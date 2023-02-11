@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <title>Текстовый квест</title>
+</head>
+<body>
+    <div class="main">
+        
+        <div class="app main__menu" v-show="showMainMenu">
+            <div class="app__header">
+                <h1>Gothic Quest</h1>
+            </div>
+            <div class="app__inner">
+                <button class="btn menu_btn">
+                    <p>Продолжить</p>
+                </button>
+                <button class="btn menu_btn" @click="GoToCreating">
+                    <p>Новая игра</p>
+                </button>
+                <button class="btn menu_btn">
+                    <p>Статистика</p>
+                </button>
+                <button class="btn menu_btn">
+                    <p>Об игре</p>
+                </button>
+            </div>
+        </div> 
+
+        <div class="app creating__char" v-show="showCreatingChar">
+            <div class="app__header">
+                <h1>Создание персонажа</h1>
+            </div>
+            <div class="app__inner">
+
+                <div class="class_char">
+                    <h2>Класс персонажа</h2>
+                    <div class="class__icons">
+                        <div class="class__warrior">
+                            <button class="btn classname_btn" @click="char_properties.class_name='воин'">
+                                <p class="class_name">Воин</p>
+                                <img src="../fonts/sword.svg" alt="">
+                            </button>
+                        </div>
+                        <div class="class rogue" @click="char_properties.class_name='разбойник'">
+                            <button class="btn classname_btn">
+                                <p class="class_name">Разбойник</p>
+                                <img src="../fonts/archer.svg" alt="">
+                            </button>
+                        </div>
+                        <div class="class__mage">
+                            <button class="btn classname_btn" @click="char_properties.class_name='маг'">
+                                <p class="class_name">Маг</p>
+                                <img src="../fonts/shuriken.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                    <p class="description">Мастер владения оружием ближнего боя. Имеет повышенную выносливость и устойчивость к физическому урону</p>
+                </div>
+
+                <div class="characteristic">
+                    <h2>Характеристики</h2>
+                    <div class="parameters__creating">
+                        <div class="parameter power">
+                            <i class="fa fa-plus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
+                                'this.char_properties.free_points > 0', 
+                                'this.char_properties.power++',
+                                'this.char_properties.free_points--')">
+                            </i>
+                            <p class="param_name">Могущество</p>
+                            <p class="value">{{ char_properties.power }}</p>
+                            <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
+                                'this.char_properties.power > 0', 
+                                'this.char_properties.power--',
+                                'this.char_properties.free_points++')">
+                            </i>
+                        </div>
+                        <div class="parameter mind">
+                            <i class="fa fa-plus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
+                                'this.char_properties.free_points > 0', 
+                                'this.char_properties.mind++',
+                                'this.char_properties.free_points--')">
+                            </i>                         
+                            <p class="param_name">Интеллект</p>
+                            <p class="value">{{ char_properties.mind }}</p>
+                            <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
+                                'this.char_properties.mind > 0', 
+                                'this.char_properties.mind--',
+                                'this.char_properties.free_points++')">
+                            </i>
+                        </div>
+                        <div class="parameter stamina">
+                            <i class="fa fa-plus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
+                                'this.char_properties.free_points > 0', 
+                                'this.char_properties.stamina++',
+                                'this.char_properties.free_points--')">
+                            </i>   
+                            <p class="param_name">Выносливость</p>
+                            <p class="value">{{ char_properties.stamina }}</p>
+                            <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
+                                'this.char_properties.stamina > 0', 
+                                'this.char_properties.stamina--',
+                                'this.char_properties.free_points++')">
+                            </i>
+                        </div>
+                    </div>
+                    <p class="total_score">Всего очков: {{char_properties.free_points}}</p>
+                </div>
+
+                <div class="name_char">
+                    <h2>Имя</h2>
+                    <div class="inputs__creating">
+                        <input type="text" aria-label="Введите имя" value="">
+                    </div>
+                    <div>
+                        <button class="btn create_btn" @click="ValidCreatingChar">
+                            <p>Готово</p>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/const.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
