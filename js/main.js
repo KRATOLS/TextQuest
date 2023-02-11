@@ -10,7 +10,8 @@ let app = new Vue({
             class_name: "воин",
         },
         showMainMenu: true,
-        showCreatingChar: false
+        showCreatingChar: false,
+        showReadingPage: false
     },
     methods: {
         ChangeSkillPoints(allowChange, skill, freePoints) {
@@ -25,10 +26,17 @@ let app = new Vue({
         GoToCreating() {
             this.showMainMenu = false;
             this.showCreatingChar = true;
+            this.showReadingPage = false;
         },
         GoToMainMenu() {
             this.showCreatingChar = true;
             this.showMainMenu = false;
+            this.showReadingPage = false;
+        },
+        GoToReadingPage() {
+            this.showCreatingChar = false;
+            this.showMainMenu = false;
+            this.showReadingPage = true;
         },
         ValidCreatingChar() {
             let input_name = document.querySelector('.inputs__creating input');
@@ -65,7 +73,10 @@ let app = new Vue({
             }
             
             this.SaveDataChar();
+            this.GoToReadingPage();
         }
     },
 
 })
+
+
