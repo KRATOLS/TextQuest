@@ -1,4 +1,29 @@
-let app = new Vue({
+Vue.component('reading-pages', {
+    props: ['title', 'text_array'],
+    template: `
+        <div class="app text__reading">
+            <div class="app__header">
+                <h1>{{ title }}</h1>
+            </div>
+            <div class="app__inner">
+                <div class="text_page">
+                    <p class="text_part" 
+                    v-for="item in text_array">
+                        {{item}}
+                    </p>
+                </div>
+                <div class="switch__pages">
+                    <button class="btn next_page">Назад</button>
+                    <button class="btn previous_page">Дальше</button>
+                </div>
+            </div>
+        </div> 
+    `
+})
+
+ 
+
+const app = new Vue({
     el: '.main',
     data: {
         char_properties: {
@@ -7,12 +32,15 @@ let app = new Vue({
             stamina: 0,
             power: 0,
             char_name: "",
-            class_name: "воин",
+            class_name: "rogue",
         },
+        current_page: "1",
+        readingPages: reading_pages,
         showMainMenu: true,
         showCreatingChar: false,
         showReadingPage: false
     },
+    
     methods: {
         ChangeSkillPoints(allowChange, skill, freePoints) {
             if(eval(allowChange)) {
@@ -78,5 +106,4 @@ let app = new Vue({
     },
 
 })
-
 
