@@ -98,6 +98,7 @@ body {
 }
 .description {
     text-align: center;
+    width: 40%;
 }
 .characteristic {
     display: flex;
@@ -126,6 +127,8 @@ body {
 }
 .creating__char {
     background-image: url("../img/bgr_creating.jpg");
+}
+.app {
     background-size: cover;
     background-position: center center;
 }

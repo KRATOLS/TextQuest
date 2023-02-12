@@ -11,7 +11,7 @@
 <body>
     <div class="main">
         
-        <!-- <div class="app main__menu" v-show="showMainMenu">
+        <div class="app main__menu" v-show="showMainMenu">
             <div class="app__header">
                 <h1>Gothic Quest</h1>
             </div>
@@ -59,7 +59,7 @@
                             </button>
                         </div>
                     </div>
-                    <p class="description">Мастер владения оружием ближнего боя. Имеет повышенную выносливость и устойчивость к физическому урону</p>
+                    <p class="description">{{ classDescription[char_properties.class_name] }}</p>
                 </div>
 
                 <div class="characteristic">
@@ -124,12 +124,26 @@
                 </div>              
 
             </div>
-        </div> -->
-        
-        <reading-pages 
-            :title = "readingPages[current_page].place[char_properties.class_name]"
-            :text_array = "readingPages[current_page].text[char_properties.class_name]">
-        </reading-pages>
+        </div>
+
+        <div class="app text__reading" 
+            v-show="showReadingPage" 
+            v-bind:style="{  
+                'background-image': 'url(img/'+readingPages[curReadingPage].image[char_properties.class_name], 'color': 'white' 
+            }">
+            <title-pages 
+                :title = "readingPages[curReadingPage].place[char_properties.class_name]">
+            </title-pages>
+            <div class="app__inner">
+                <text-pages 
+                    :text_array = "readingPages[curReadingPage].text[char_properties.class_name]">
+                </text-pages>
+                <div class="switch__pages">
+                    <button class="btn next_page">Назад</button>
+                    <button class="btn previous_page">Дальше</button>
+                </div>
+            </div>
+        </div> 
 
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
