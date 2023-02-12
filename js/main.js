@@ -1,27 +1,23 @@
-Vue.component('reading-pages', {
-    props: ['title', 'text_array'],
+Vue.component('text-pages', {
+    props: ['text_array'],
     template: `
-        <div class="app text__reading">
-            <div class="app__header">
-                <h1>{{ title }}</h1>
-            </div>
-            <div class="app__inner">
-                <div class="text_page">
-                    <p class="text_part" 
-                    v-for="item in text_array">
-                        {{item}}
-                    </p>
-                </div>
-                <div class="switch__pages">
-                    <button class="btn next_page">Назад</button>
-                    <button class="btn previous_page">Дальше</button>
-                </div>
-            </div>
-        </div> 
+        <div class="text_page">
+            <p class="text_part" 
+            v-for="item in text_array">
+                {{item}}
+            </p>
+        </div>
     `
 })
 
- 
+Vue.component('title-pages', {
+    props: ['title'],
+    template: `
+        <div class="app__header">
+            <h1>{{ title }}</h1>
+        </div>
+    `
+})
 
 const app = new Vue({
     el: '.main',
@@ -34,11 +30,14 @@ const app = new Vue({
             char_name: "",
             class_name: "rogue",
         },
-        current_page: "1",
+        curReadingPage: 1,
+        curChoicePage: 0,
+        curTotalPage: 0,
         readingPages: reading_pages,
-        showMainMenu: true,
+        classDescription: class_description,
+        showMainMenu: false,
         showCreatingChar: false,
-        showReadingPage: false
+        showReadingPage: true
     },
     
     methods: {
