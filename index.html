@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,11 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <title>Текстовый квест</title>
 </head>
+
 <body>
     <div class="main">
-        
-        <div class="app main__menu" v-show="showMainMenu">
+
+        <!-- <div class="app main__menu" v-show="showMainMenu">
             <div class="app__header">
                 <h1>Gothic Quest</h1>
             </div>
@@ -29,7 +31,7 @@
                     <p>Об игре</p>
                 </button>
             </div>
-        </div> 
+        </div>
 
         <div class="app creating__char" v-show="showCreatingChar">
             <div class="app__header">
@@ -84,7 +86,7 @@
                                 'this.char_properties.free_points > 0', 
                                 'this.char_properties.mind++',
                                 'this.char_properties.free_points--')">
-                            </i>                         
+                            </i>
                             <p class="param_name">Интеллект</p>
                             <p class="value">{{ char_properties.mind }}</p>
                             <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
@@ -98,7 +100,7 @@
                                 'this.char_properties.free_points > 0', 
                                 'this.char_properties.stamina++',
                                 'this.char_properties.free_points--')">
-                            </i>   
+                            </i>
                             <p class="param_name">Выносливость</p>
                             <p class="value">{{ char_properties.stamina }}</p>
                             <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
@@ -121,29 +123,54 @@
                             <p>Готово</p>
                         </button>
                     </div>
-                </div>              
+                </div>
 
             </div>
         </div>
 
-        <div class="app text__reading" 
-            v-show="showReadingPage" 
-            v-bind:style="{  
-                'background-image': 'url(img/'+readingPages[curReadingPage].image[char_properties.class_name], 'color': 'white' 
+        <div class="app text__reading" v-show="showReadingPage" v-bind:style="{  
+                'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
             }">
-            <title-pages 
-                :title = "readingPages[curReadingPage].place[char_properties.class_name]">
+            <title-pages :title="titlePage">
             </title-pages>
             <div class="app__inner">
-                <text-pages 
-                    :text_array = "readingPages[curReadingPage].text[char_properties.class_name]">
+                <text-pages :text_array="textPage">
                 </text-pages>
                 <div class="switch__pages">
                     <button class="btn next_page">Назад</button>
                     <button class="btn previous_page">Дальше</button>
                 </div>
             </div>
-        </div> 
+        </div> -->
+
+        <div class="app text__reading">
+            <div class="app__header">
+                <h1>Лес теней</h1>
+            </div>
+            <div class="app__inner">
+                <div class="text_page">
+                    <p class="text_part">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati rem ullam ut
+                        ab distinctio id saepe dolore magni dolorum tempora ex dolores, inventore mollitia doloribus
+                        minima qui sed. Eveniet modi corporis rem aperiam, quae soluta totam cumque voluptatem, ut
+                        voluptates unde voluptatum, fugiat esse doloribus possimus illo! Veritatis, pariatur quas!
+                    </p>
+                </div>
+                <div class="choices">
+                    <label>
+                        <input class="radio" type="radio" name="action" value="0">
+                        <span>Осмотреть рыцаря</span>
+                    </label>
+                    <label>
+                        <input class="radio" type="radio" name="action" value="1">
+                        <span>Бежать к своим</span>
+                    </label>
+                    <label>
+                        <input class="radio" type="radio" name="action" value="2">
+                        <span>Атаковать противника</span>
+                    </label>
+                </div>
+            </div>
+        </div>
 
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -151,4 +178,5 @@
     <script src="js/const.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

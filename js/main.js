@@ -30,14 +30,18 @@ const app = new Vue({
             char_name: "",
             class_name: "rogue",
         },
-        curReadingPage: 1,
-        curChoicePage: 0,
-        curTotalPage: 0,
-        readingPages: reading_pages,
+        curPage: 1,
+        pages: pages,
         classDescription: class_description,
-        showMainMenu: false,
+        textPage: "",
+        titlePage: "",
+        backgroundPage: "",
+        showMainMenu: true,
         showCreatingChar: false,
-        showReadingPage: true
+        showReadingPage: false,
+        showChoicePage: false,
+        showInfoPage: false,
+        showGameOverPage: false
     },
     
     methods: {
@@ -58,12 +62,42 @@ const app = new Vue({
         GoToMainMenu() {
             this.showCreatingChar = true;
             this.showMainMenu = false;
+            this.showChoicePage = false;
+            this.showInfoPage = false;
+            this.showGameOverPage = false;
             this.showReadingPage = false;
         },
         GoToReadingPage() {
             this.showCreatingChar = false;
             this.showMainMenu = false;
+            this.showChoicePage = false;
+            this.showInfoPage = false;
+            this.showGameOverPage = false;
             this.showReadingPage = true;
+        },
+        GoToChoicePage() {
+            this.showCreatingChar = false;
+            this.showMainMenu = false;
+            this.showChoicePage = true;
+            this.showInfoPage = false;
+            this.showGameOverPage = false;
+            this.showReadingPage = false;
+        },
+        GoToInfoPage() {
+            this.showCreatingChar = false;
+            this.showMainMenu = false;
+            this.showChoicePage = false;
+            this.showInfoPage = true;
+            this.showGameOverPage = false;
+            this.showReadingPage = false;
+        },
+        GoToGameOverPage() {
+            this.showCreatingChar = true;
+            this.showMainMenu = false;
+            this.showChoicePage = false;
+            this.showInfoPage = true;
+            this.showGameOverPage = false;
+            this.showReadingPage = false;
         },
         ValidCreatingChar() {
             let input_name = document.querySelector('.inputs__creating input');
@@ -101,6 +135,24 @@ const app = new Vue({
             
             this.SaveDataChar();
             this.GoToReadingPage();
+            this.GetTextPage();
+            this.GetTitlePage();
+            this.GetBackGroundPage();
+        },
+        GetTextPage() {
+            let texts = [];
+
+            for(let item of this.pages[this.curPage].text[this.char_properties.class_name]) {
+                if((item.length > 1 && eval(item[1])) | item.length == 1)   //Отображать если в массиве один элемент или выполняется условие его отображения
+                    texts.push(item[0]);
+            }
+            this.textPage = texts;
+        },
+        GetTitlePage() {
+            this.titlePage = this.pages[this.curPage].place[this.char_properties.class_name];
+        },
+        GetBackGroundPage() {
+            this.backgroundPage = this.pages[this.curPage].image[this.char_properties.class_name];
         }
     },
 
