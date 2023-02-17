@@ -10,12 +10,6 @@ body {
     padding: 0;
     font-family: AubreyPro;
 }
-@media only screen and (max-width: 640px) {
-    .main__menu {
-        background-position: 25% 100%;
-    }
-
-}
 /*Общие настройки*/
 .app {
     height: 100vh;
@@ -162,7 +156,7 @@ body {
     font-size: 24px;
     justify-content: center;
 }
-.radio {
+.choices input {
     width: 24px;
     height: 24px;
 }
@@ -173,4 +167,10 @@ body {
 .choices span {
     padding-left: 5px;
     padding-top: 5px;
+}
+@media only screen and (max-width: 640px) {
+    .main__menu {
+        background-position: 25% 100%;
+    }
+
 }

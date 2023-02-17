@@ -19,6 +19,19 @@ Vue.component('title-pages', {
     `
 })
 
+Vue.component('actions-pages', {
+    props: ['actions'],
+    template: `
+        <div class="choices">
+            <label
+            v-for="(item, i) in actions">
+                <input class="radio_btn" type="radio" name="action" v-bind:value="i">
+                <span>{{item}}</span>
+            </label>
+        </div>
+    `
+})
+
 const app = new Vue({
     el: '.main',
     data: {
@@ -35,6 +48,7 @@ const app = new Vue({
         classDescription: class_description,
         textPage: "",
         titlePage: "",
+        actionsPage: [],
         backgroundPage: "",
         showMainMenu: true,
         showCreatingChar: false,
@@ -139,6 +153,35 @@ const app = new Vue({
             this.GetTitlePage();
             this.GetBackGroundPage();
         },
+        UpdatePage() {
+            if(this.pages[this.curPage].type == "reading") {
+                this.GoToReadingPage();
+                this.GetTextPage();
+                this.GetTitlePage();
+                this.GetBackGroundPage();
+            }
+            else {
+                this.GoToChoicePage();
+                this.GetTextPage();
+                this.GetTitlePage();
+                this.GetActionsPage();
+                this.GetBackGroundPage();
+            }
+        },
+        NextPageAfterReading() {
+            this.curPage = this.pages[this.curPage].next_page;
+            this.UpdatePage();
+        },
+        NextPageAfterChoice() {
+            let radio_btns = document.querySelectorAll('.radio_btn');
+            for(item of radio_btns) {
+                if(item.checked) {
+                    this.curPage = this.pages[this.curPage].actions[this.char_properties.class_name][item.value][0][1];
+                    this.UpdatePage();
+                    break;
+                }
+            }
+        },
         GetTextPage() {
             let texts = [];
 
@@ -147,6 +190,16 @@ const app = new Vue({
                     texts.push(item[0]);
             }
             this.textPage = texts;
+        },
+        GetActionsPage() {
+            let actions = [];
+
+            for(let item of this.pages[this.curPage].actions[this.char_properties.class_name]) {
+                if((item.length > 1 && eval(item[1])) | item.length == 1) {
+                    actions.push(item[0][0]);
+                }
+            }
+            this.actionsPage = actions;
         },
         GetTitlePage() {
             this.titlePage = this.pages[this.curPage].place[this.char_properties.class_name];

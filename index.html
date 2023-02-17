@@ -13,7 +13,7 @@
 <body>
     <div class="main">
 
-        <!-- <div class="app main__menu" v-show="showMainMenu">
+        <div class="app main__menu" v-show="showMainMenu">
             <div class="app__header">
                 <h1>Gothic Quest</h1>
             </div>
@@ -137,37 +137,21 @@
                 <text-pages :text_array="textPage">
                 </text-pages>
                 <div class="switch__pages">
-                    <button class="btn next_page">Назад</button>
-                    <button class="btn previous_page">Дальше</button>
+                    <!-- <button class="btn previous_page">Назад</button> -->
+                    <button class="btn next_page" @click="NextPageAfterReading">Дальше</button>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <div class="app text__reading">
-            <div class="app__header">
-                <h1>Лес теней</h1>
-            </div>
+        <div class="app text__reading" v-show="showChoicePage" v-bind:style="{  
+                'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
+            }">
+            <title-pages :title="titlePage"></title-pages>
             <div class="app__inner">
-                <div class="text_page">
-                    <p class="text_part">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati rem ullam ut
-                        ab distinctio id saepe dolore magni dolorum tempora ex dolores, inventore mollitia doloribus
-                        minima qui sed. Eveniet modi corporis rem aperiam, quae soluta totam cumque voluptatem, ut
-                        voluptates unde voluptatum, fugiat esse doloribus possimus illo! Veritatis, pariatur quas!
-                    </p>
-                </div>
-                <div class="choices">
-                    <label>
-                        <input class="radio" type="radio" name="action" value="0">
-                        <span>Осмотреть рыцаря</span>
-                    </label>
-                    <label>
-                        <input class="radio" type="radio" name="action" value="1">
-                        <span>Бежать к своим</span>
-                    </label>
-                    <label>
-                        <input class="radio" type="radio" name="action" value="2">
-                        <span>Атаковать противника</span>
-                    </label>
+                <text-pages :text_array="textPage"></text-pages>
+                <actions-pages :actions="actionsPage"></actions-pages>
+                <div class="switch__pages">
+                    <button class="btn confirm" @click="NextPageAfterChoice">Подтвердить</button>
                 </div>
             </div>
         </div>
