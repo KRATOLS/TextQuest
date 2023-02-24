@@ -48,8 +48,8 @@
                                 <img src="fonts/sword.svg" alt="">
                             </button>
                         </div>
-                        <div class="class rogue" @click="char_properties.class_name='rogue'">
-                            <button class="btn classname_btn">
+                        <div class="class__rogue" @click="char_properties.class_name='rogue'">
+                            <button class="btn classname_btn classname_rogue_color">
                                 <p class="class_name">Разбойник</p>
                                 <img src="fonts/archer.svg" alt="">
                             </button>
@@ -131,29 +131,47 @@
         <div class="app text__reading" v-show="showReadingPage" v-bind:style="{  
                 'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
             }">
-            <title-pages :title="titlePage">
+            <title-pages :title="titlePage" :style_obj="stylesTitlePages">
             </title-pages>
-            <div class="app__inner">
-                <text-pages :text_array="textPage">
+            <div class="app__inner page">
+                <text-pages :text_array="textPage" :style_obj="stylesTextPages">
                 </text-pages>
                 <div class="switch__pages">
-                    <!-- <button class="btn previous_page">Назад</button> -->
                     <button class="btn next_page" @click="NextPageAfterReading">Дальше</button>
                 </div>
             </div>
         </div>
 
-        <div class="app text__reading" v-show="showChoicePage" v-bind:style="{  
+        <div class="app choice__actions" v-show="showChoicePage" v-bind:style="{  
                 'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
             }">
-            <title-pages :title="titlePage"></title-pages>
-            <div class="app__inner">
-                <text-pages :text_array="textPage"></text-pages>
+            <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
+            <div class="app__inner page">
+                <text-pages :text_array="textPage" :style_obj="stylesTextPages" class="text"></text-pages>
                 <actions-pages :actions="actionsPage"></actions-pages>
                 <div class="switch__pages">
                     <button class="btn confirm" @click="NextPageAfterChoice">Подтвердить</button>
                 </div>
             </div>
+        </div>
+
+        <div class="app info__reading" v-show="showInfoPage" v-bind:style="{  
+            'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
+        }">
+            <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
+            <div class="app__inner page">
+                <text-pages :text_array="textPage" :style_obj="stylesTextPages"></text-pages>
+                <div class="switch__pages">
+                    <button class="btn confirm" @click="PreviousPageBeforeInfo">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="app game__over" v-show="showGameOverPage">
+            <div class="final__text">
+                <h1>ВЫ ПРОИГРАЛИ</h1>
+            </div>
+            <button class="btn" @click="GoToMainMenu">Главное меню</button>
         </div>
 
     </div>

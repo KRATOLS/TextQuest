@@ -84,10 +84,14 @@ pages = {
             mage: [],
             warrior: []
         },
-        actions: [
-            [['Меня не сломить! Продолжить атаку', 6]],
-            [['Чёрт, надо удирать! Бегите к своим', 5]],
-        ],
+        actions: {
+            rogue: [
+                [['Меня не сломить! Продолжить атаку', 6]],
+                [['Чёрт, надо удирать! Бегите к своим', 5]],
+            ],
+            mage: [],
+            warrior: []
+        },
         image: {
             rogue: '1_reading.jpeg',
             mage: '',
@@ -129,7 +133,13 @@ pages = {
             mage: [],
             warrior: []
         },
-        type: "end",
+        image: {
+            rogue: '1_reading.jpeg',
+            mage: '',
+            warrior: ''
+        },
+        type: "reading",
+        next_page: "defeat"
     },
     7:  { 
         place: {
@@ -211,12 +221,16 @@ pages = {
             mage: [],
             warrior: []
         },
-        actions: [
-            [['Выстрелить из лука', 11], '!this.events.seeGuard'],
-            [['Атаковать парными кинжалами', 12]],
-            [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
-            [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard']
-        ],
+        actions: {
+            rogue: [
+                [['Выстрелить из лука', 11], '!this.events.seeGuard'],
+                [['Атаковать парными кинжалами', 12]],
+                [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
+                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard']
+            ],
+            mage: [],
+            warrior: []
+        },
         image: {
             rogue: '1_reading.jpeg',
             mage: '',
@@ -224,6 +238,9 @@ pages = {
         },
         type: "choice",
     },
+    'defeat': {
+        type: "game_over"
+    }
 },
 events = {
     sayUnluckyAttack: false,        //Неудачная атака стр.2;
@@ -234,4 +251,16 @@ class_description = {
     warrior: 'Мастер владения оружием ближнего боя. Имеет повышенную выносливость и устойчивость к физическому урону',
     rogue: 'Профессионально владеет оружием дальнего боя. Имеет способность взламывать замки и устойчивость к ядам',
     mage: 'Знаток магических искусств. Использует силы стихий для обороны и нападения. Имеет дар к убеждению'
-}   
+}
+
+place_styles = {
+    'Лес теней': {
+        'text-pages': {
+            'color': 'white'
+        },
+        'title-pages': {
+            'margin-top': '60px',
+            'color': 'rgb(199, 50, 50)'
+        }
+    },   
+}

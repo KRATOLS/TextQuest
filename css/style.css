@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
 }
 .app__header {
     display: flex;
@@ -29,6 +30,10 @@ body {
     justify-content: space-evenly;
     height: 60%;
     margin: auto 0;
+}
+.app__inner.page{
+    align-items: center;
+    height: 70%;
 }
 .btn {
     text-transform: uppercase;
@@ -46,6 +51,10 @@ body {
 .main__menu {
     background-image: url("../img/background.jpg");
     background-size: cover;
+}
+.app {
+    background-size: cover;
+    background-position: center center;
 }
 /*Создание персонажа*/
 .class_char {
@@ -94,6 +103,15 @@ body {
     text-align: center;
     width: 40%;
 }
+.classname_warrior_color {
+    background-color: red;
+}
+.classname_rogue_color {
+    background-color: green;
+}
+.classname_mage_color {
+    background-color: rgb(46, 107, 238);
+}
 .characteristic {
     display: flex;
     flex-direction: column;
@@ -122,19 +140,11 @@ body {
 .creating__char {
     background-image: url("../img/bgr_creating.jpg");
 }
-.app {
-    background-size: cover;
-    background-position: center center;
-}
 .inputs__creating input{
     text-align: center;
     font-size: 16px;
 }
 /*Страница для чтения*/
-.text__reading .app__inner{
-    align-items: center;
-    height: 85%;
-}
 .text_page {
     overflow-y: auto;
     width: 70%;
@@ -142,7 +152,7 @@ body {
 }
 .text_part {
     text-align: center;
-    font-size: 24px;
+    font-size: 18px;
 }
 .switch__pages .btn {
     width: 120px;
@@ -159,18 +169,135 @@ body {
 .choices input {
     width: 24px;
     height: 24px;
+    min-width: 24px;
+    min-height: 24px;
 }
 .choices label {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 }
 .choices span {
     padding-left: 5px;
     padding-top: 5px;
 }
-@media only screen and (max-width: 640px) {
-    .main__menu {
-        background-position: 25% 100%;
-    }
+/*Страница с инфо*/
 
+/*Страница конец игры*/
+.game__over {
+    background-color: black;
+    color: red;
+    align-items: center;
+    justify-content: center;
+}
+.game__over .btn {
+    width: 150px;
+    height: 50px;
+}
+.final__text {
+    font-size: 50px;
+    text-align: center;
+}
+/*Медиа запросы*/
+/*Высота*/
+@media only screen and (max-height: 1080px) {
+    .main__menu {
+        background-position: 100% 30%;
+    }
+}
+@media only screen and (max-height: 856px) {
+    .creating__char {
+        font-size: 14px;
+    }
+    .classname_btn {
+        width: 10px;
+    }
+}
+@media only screen and (max-height: 670px) {
+    .creating__char {
+        font-size: 12px;
+    }
+    .classname_btn {
+        width: 50px;
+        padding: 0 35px;
+    }
+    .class__icons img {
+        width: 40px;
+    }
+    .class_name {
+        font-size: 9px;
+    }
+}
+@media only screen and (max-height: 568px) {
+    .creating__char {
+        font-size: 8px;
+    }
+    .classname_btn {
+        width: 40px;
+        padding: 0 20px;
+    }
+    .class__icons img {
+        width: 30px;
+    }
+    .class_name {
+        font-size: 6px;
+    }
+}
+@media only screen and (max-height: 480px) {
+    .switch__pages .btn {
+        width: 120px;
+        height: 30px;
+        background-color: red;
+    }
+    .text_part{
+        margin: 0;
+    }
+}
+/*Ширина*/
+@media only screen and (max-width: 640px) {
+    /* .main__menu {
+        background-position: 25% 100%;
+    } */
+    .final__text {
+        font-size: 40px;
+    }
+    .text_part{
+        font-size: 22px;
+    }
+}
+@media only screen and (max-width: 540px) {
+    .choices {
+        font-size: 18px;
+    }
+    .text_part{
+        font-size: 20px;
+    }
+    .final__text {
+        font-size: 30px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .choices {
+        font-size: 16px;
+    }
+    .text_part {
+        font-size: 14px;
+    }
+    .app__header {
+        font-size: 9px;
+    }
+    .final__text {
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .choices {
+        font-size: 12px;
+    }
+    .text_part{
+        font-size: 14px;
+    }
+    .app__header {
+        font-size: 6px;
+    }
 }
