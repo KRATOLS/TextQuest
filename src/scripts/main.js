@@ -9,8 +9,6 @@ Vue.component('text-pages', {
         </div>
     `
 })
-// import TextPages from './TextPages';
-// Vue.component('text-pages', TextPages);
 
 Vue.component('title-pages', {
     props: ['title', 'style_obj'],
@@ -27,7 +25,7 @@ Vue.component('actions-pages', {
         <div class="choices">
             <label
             v-for="(item, i) in actions">
-                <input class="radio_btn" type="radio" name="action" v-bind:value="i">
+                <input class="radio_btn" type="radio" name="action" v-bind:value="i" checked>
                 <span>{{item}}</span>
             </label>
         </div>
@@ -37,7 +35,7 @@ Vue.component('actions-pages', {
 const app = new Vue({
     el: '.main',
     data: {
-        char_properties: {
+        char_properties: localStorage.getItem('data_char') ? JSON.parse(localStorage.getItem('data_char')) : {
             free_points: 5,
             mind: 0,
             stamina: 0,
@@ -45,7 +43,13 @@ const app = new Vue({
             char_name: "",
             class_name: "rogue",
         },
-        curPage: 1,
+        curPage: localStorage.getItem('current_game') ? localStorage.getItem('current_game') : 0,
+        total_class_games: localStorage.getItem('total_class_games') ? JSON.parse(localStorage.getItem('total_class_games')) : {
+            rogue: {'Побед': 0, 'Поражений': 0},
+            mage: {'Побед': 0, 'Поражений': 0},
+            warrior: {'Побед': 0, 'Поражений': 0},
+        },
+        total_games : localStorage.getItem('total_games') ? localStorage.getItem('total_games') : 0,
         previousPage: 0,
         pages: pages,
         classDescription: class_description,
@@ -85,7 +89,21 @@ const app = new Vue({
         SaveDataChar() {
             localStorage.setItem('data_char', JSON.stringify(this.char_properties));
         },
+        SaveCurrentGame() {
+            localStorage.setItem('current_game', this.curPage);
+        },
         GoToCreating() {
+            let input_name = document.querySelector('.inputs__creating input');
+            input_name.value = "";
+
+            this.char_properties = {
+                free_points: 5,
+                mind: 0,
+                stamina: 0,
+                power: 0,
+                char_name: "",
+                class_name: "rogue",
+            }
             this.showMainMenu = false;
             this.showCreatingChar = true;
             this.showReadingPage = false;
@@ -129,6 +147,12 @@ const app = new Vue({
             this.showInfoPage = false;
             this.showGameOverPage = true;
             this.showReadingPage = false;
+            this.total_games++;
+            this.total_class_games[this.char_properties.class_name]['Поражений']++;
+            localStorage.removeItem('data_char');
+            localStorage.removeItem('current_game');
+            localStorage.setItem('total_class_games', JSON.stringify(this.total_class_games));
+            localStorage.setItem('total_games', this.total_games);
         },
         ValidCreatingChar() {
             let input_name = document.querySelector('.inputs__creating input');
@@ -163,37 +187,29 @@ const app = new Vue({
                 })
                 return;
             }
-            
-            this.SaveDataChar();
-            this.GoToReadingPage();
-            this.GetTextPage();
-            this.GetTitlePage();
-            this.GetBackGroundPage();
+            this.curPage = 1;
+            this.UpdatePage();
         },
         UpdatePage() {
             if(this.curPage != 'defeat') {
                 this.GetStylesForTextPages();
                 this.GetStylesForTitlePages();
+                this.GetTextPage();
+                this.GetTitlePage();
+                this.GetBackGroundPage();
+                this.SaveDataChar();
+                this.SaveCurrentGame();
             }
             switch(this.pages[this.curPage].type) {
                 case 'reading':
                     this.GoToReadingPage();
-                    this.GetTextPage();
-                    this.GetTitlePage();
-                    this.GetBackGroundPage();
                     break;
                 case 'choice':
                     this.GoToChoicePage();
-                    this.GetTextPage();
-                    this.GetTitlePage();
                     this.GetActionsPage();
-                    this.GetBackGroundPage();
                     break;
                 case 'info':
                     this.GoToInfoPage();
-                    this.GetTextPage();
-                    this.GetTitlePage();
-                    this.GetBackGroundPage();
                     break;
                 default:
                     this.GoToGameOverPage();
@@ -246,12 +262,6 @@ const app = new Vue({
         GetBackGroundPage() {
             this.backgroundPage = this.pages[this.curPage].image[this.char_properties.class_name];
         },
-        UpdateStyles() {
-            let text_part = document.querySelectorAll
-            if (this.pages[this.curPage].place[this.char_properties.class_name] == 'Лес Теней') {
-
-            }
-        }
     },
 
 })
@@ -259,9 +269,11 @@ document.addEventListener("click", function(e) {
     elem = e.target;
     if(elem.closest('.class__icons') == null)
         return;
+
     let warrior = document.querySelector('.class__warrior .btn');
     let rogue = document.querySelector('.class__rogue .btn');
     let mage = document.querySelector('.class__mage .btn');
+    
     if (elem.closest('.class__warrior') != null){
         warrior.classList.add('classname_warrior_color');
         rogue.classList.remove('classname_rogue_color');

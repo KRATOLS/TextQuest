@@ -259,7 +259,7 @@ place_styles = {
             'color': 'white'
         },
         'title-pages': {
-            'margin-top': '60px',
+            'padding-top': '30px',
             'color': 'rgb(199, 50, 50)'
         }
     },   
