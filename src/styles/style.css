@@ -1,0 +1,304 @@
+@font-face {
+    font-family: "AubreyPro";
+    src: url("../fonts/AubreyPro.otf");
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: AubreyPro;
+}
+/*Общие настройки*/
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.app__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.app__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60%;
+    margin: auto 0;
+}
+.app__inner.page{
+    align-items: center;
+    height: 70%;
+}
+.btn {
+    text-transform: uppercase;
+    font-family: AubreyPro;
+}
+/*Главное меню*/
+.menu_btn {
+    width: 100%;
+    max-width: 480px;
+    align-items: center;
+    margin: 0 auto;
+    background-color:bisque;
+    font-size: 16px;
+}
+.main__menu {
+    background-image: url("../img/background.jpg");
+    background-size: cover;
+}
+.app {
+    background-size: cover;
+    background-position: center center;
+}
+/*Создание персонажа*/
+.class_char {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.class_name {
+    text-align: left;
+}
+.class__icons {
+    display: flex;
+}
+.classname_btn {
+    width: 120px;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.class__icons img {
+    width: 60px;
+}
+.parameter {
+    display: flex;
+    align-items: center;
+}
+.parameter i {
+    font-size: 24px;
+}
+.parameter i:hover {
+    color: red;
+}
+.parameter .value{
+    margin-left: auto;
+    margin-right: 15px;
+}
+.parameter .param_name {
+    margin-left: 15px;
+}
+.stamina .value {
+    margin-left: 15px;
+}
+.description {
+    text-align: center;
+    width: 40%;
+}
+.classname_warrior_color {
+    background-color: red;
+}
+.classname_rogue_color {
+    background-color: green;
+}
+.classname_mage_color {
+    background-color: rgb(46, 107, 238);
+}
+.characteristic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.name_char {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.inputs__creating {
+    margin-bottom: 15px;
+}
+.inputs__creating input {
+    width: 300px;
+    height: 30px;
+}
+.create_btn {
+    width: 140px;
+}
+.creating__char .app__inner {
+    height: 80%;
+}
+.creating__char {
+    background-image: url("../img/bgr_creating.jpg");
+}
+.inputs__creating input{
+    text-align: center;
+    font-size: 16px;
+}
+/*Страница для чтения*/
+.text_page {
+    overflow-y: auto;
+    width: 70%;
+    margin-bottom: 30px;
+}
+.text_part {
+    text-align: center;
+    font-size: 18px;
+}
+.switch__pages .btn {
+    width: 120px;
+    height: 40px;
+    background-color: red;
+}
+/*Страница выбора действия*/
+.choices {
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    justify-content: center;
+}
+.choices input {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+}
+.choices label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.choices span {
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+/*Страница с инфо*/
+
+/*Страница конец игры*/
+.game__over {
+    background-color: black;
+    color: red;
+    align-items: center;
+    justify-content: center;
+}
+.game__over .btn {
+    width: 150px;
+    height: 50px;
+}
+.final__text {
+    font-size: 50px;
+    text-align: center;
+}
+/*Медиа запросы*/
+/*Высота*/
+@media only screen and (max-height: 1080px) {
+    .main__menu {
+        background-position: 100% 30%;
+    }
+}
+@media only screen and (max-height: 856px) {
+    .creating__char {
+        font-size: 14px;
+    }
+    .classname_btn {
+        width: 10px;
+    }
+}
+@media only screen and (max-height: 670px) {
+    .creating__char {
+        font-size: 12px;
+    }
+    .classname_btn {
+        width: 50px;
+        padding: 0 35px;
+    }
+    .class__icons img {
+        width: 40px;
+    }
+    .class_name {
+        font-size: 9px;
+    }
+}
+@media only screen and (max-height: 568px) {
+    .creating__char {
+        font-size: 8px;
+    }
+    .classname_btn {
+        width: 40px;
+        padding: 0 20px;
+    }
+    .class__icons img {
+        width: 30px;
+    }
+    .class_name {
+        font-size: 6px;
+    }
+}
+@media only screen and (max-height: 480px) {
+    .switch__pages .btn {
+        width: 120px;
+        height: 30px;
+        background-color: red;
+    }
+    .text_part{
+        margin: 0;
+    }
+}
+/*Ширина*/
+@media only screen and (max-width: 640px) {
+    /* .main__menu {
+        background-position: 25% 100%;
+    } */
+    .final__text {
+        font-size: 40px;
+    }
+    .text_part{
+        font-size: 22px;
+    }
+}
+@media only screen and (max-width: 540px) {
+    .choices {
+        font-size: 18px;
+    }
+    .text_part{
+        font-size: 20px;
+    }
+    .final__text {
+        font-size: 30px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .choices {
+        font-size: 16px;
+    }
+    .text_part {
+        font-size: 12px;
+    }
+    .app__header {
+        font-size: 14px;
+    }
+    .final__text {
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .choices {
+        font-size: 12px;
+    }
+    .text_part{
+        font-size: 10px;
+    }
+    .app__header {
+        font-size: 12px;
+    }
+}

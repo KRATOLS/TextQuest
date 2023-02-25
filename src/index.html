@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <title>Текстовый квест</title>
 </head>
+
 <body>
     <div class="main">
-        
+
         <div class="app main__menu" v-show="showMainMenu">
             <div class="app__header">
                 <h1>Gothic Quest</h1>
             </div>
             <div class="app__inner">
-                <button class="btn menu_btn">
+                <button class="btn menu_btn" v-show="curPage>0" @click="UpdatePage">
                     <p>Продолжить</p>
                 </button>
                 <button class="btn menu_btn" @click="GoToCreating">
@@ -29,7 +31,7 @@
                     <p>Об игре</p>
                 </button>
             </div>
-        </div> 
+        </div>
 
         <div class="app creating__char" v-show="showCreatingChar">
             <div class="app__header">
@@ -41,25 +43,25 @@
                     <h2>Класс персонажа</h2>
                     <div class="class__icons">
                         <div class="class__warrior">
-                            <button class="btn classname_btn" @click="char_properties.class_name='воин'">
+                            <button class="btn classname_btn" @click="char_properties.class_name='warrior'">
                                 <p class="class_name">Воин</p>
                                 <img src="fonts/sword.svg" alt="">
                             </button>
                         </div>
-                        <div class="class rogue" @click="char_properties.class_name='разбойник'">
-                            <button class="btn classname_btn">
+                        <div class="class__rogue" @click="char_properties.class_name='rogue'">
+                            <button class="btn classname_btn classname_rogue_color">
                                 <p class="class_name">Разбойник</p>
                                 <img src="fonts/archer.svg" alt="">
                             </button>
                         </div>
                         <div class="class__mage">
-                            <button class="btn classname_btn" @click="char_properties.class_name='маг'">
+                            <button class="btn classname_btn" @click="char_properties.class_name='mage'">
                                 <p class="class_name">Маг</p>
                                 <img src="fonts/shuriken.svg" alt="">
                             </button>
                         </div>
                     </div>
-                    <p class="description">Мастер владения оружием ближнего боя. Имеет повышенную выносливость и устойчивость к физическому урону</p>
+                    <p class="description">{{ classDescription[char_properties.class_name] }}</p>
                 </div>
 
                 <div class="characteristic">
@@ -84,7 +86,7 @@
                                 'this.char_properties.free_points > 0', 
                                 'this.char_properties.mind++',
                                 'this.char_properties.free_points--')">
-                            </i>                         
+                            </i>
                             <p class="param_name">Интеллект</p>
                             <p class="value">{{ char_properties.mind }}</p>
                             <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
@@ -98,7 +100,7 @@
                                 'this.char_properties.free_points > 0', 
                                 'this.char_properties.stamina++',
                                 'this.char_properties.free_points--')">
-                            </i>   
+                            </i>
                             <p class="param_name">Выносливость</p>
                             <p class="value">{{ char_properties.stamina }}</p>
                             <i class="fa fa-minus-square-o" aria-hidden="true" @click="ChangeSkillPoints(
@@ -126,10 +128,57 @@
             </div>
         </div>
 
+        <div class="app text__reading" v-show="showReadingPage" v-bind:style="{  
+                'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
+            }">
+            <title-pages :title="titlePage" :style_obj="stylesTitlePages">
+            </title-pages>
+            <div class="app__inner page">
+                <text-pages :text_array="textPage" :style_obj="stylesTextPages">
+                </text-pages>
+                <div class="switch__pages">
+                    <button class="btn next_page" @click="NextPageAfterReading">Дальше</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="app choice__actions" v-show="showChoicePage" v-bind:style="{  
+                'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
+            }">
+            <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
+            <div class="app__inner page">
+                <text-pages :text_array="textPage" :style_obj="stylesTextPages" class="text"></text-pages>
+                <actions-pages :actions="actionsPage"></actions-pages>
+                <div class="switch__pages">
+                    <button class="btn confirm" @click="NextPageAfterChoice">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="app info__reading" v-show="showInfoPage" v-bind:style="{  
+            'background-image': 'url(img/'+backgroundPage+')', 'color': 'white' 
+        }">
+            <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
+            <div class="app__inner page">
+                <text-pages :text_array="textPage" :style_obj="stylesTextPages"></text-pages>
+                <div class="switch__pages">
+                    <button class="btn confirm" @click="PreviousPageBeforeInfo">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="app game__over" v-show="showGameOverPage">
+            <div class="final__text">
+                <h1>ВЫ ПРОИГРАЛИ</h1>
+            </div>
+            <button class="btn" @click="GoToMainMenu">Главное меню</button>
+        </div>
+
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/vue.js"></script>
-    <script src="js/const.js"></script>
-    <script src="js/main.js"></script>
+    <script src="scripts/vue.js"></script>
+    <script src="scripts/const.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
+
 </html>
