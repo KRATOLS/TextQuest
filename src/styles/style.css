@@ -184,7 +184,7 @@ body {
 
 /*Страница с инфо*/
 
-/*Страница конец игры*/
+/*Страница конец игры. Поражение*/
 .game__over {
     background-color: black;
     color: red;
@@ -199,6 +199,22 @@ body {
     font-size: 50px;
     text-align: center;
 }
+/*Страница конец игры. Победа*/
+.game__win {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    background-image: url("../img/win.jpg");
+}
+.game__win .btn {
+    width: 200px;
+    height: 50px;
+    background-color: red;
+}
+
+
 /*Медиа запросы*/
 /*Высота*/
 @media only screen and (max-height: 1080px) {
@@ -262,6 +278,9 @@ body {
     .final__text {
         font-size: 40px;
     }
+    .game__win {
+        font-size: 40px;
+    }
     .text_part{
         font-size: 22px;
     }
@@ -274,6 +293,9 @@ body {
         font-size: 20px;
     }
     .final__text {
+        font-size: 30px;
+    }
+    .game__win {
         font-size: 30px;
     }
 }
@@ -289,6 +311,12 @@ body {
     }
     .final__text {
         font-size: 16px;
+    }
+    .game__win {
+        font-size: 16px;
+    }
+    .game__win .btn {
+        width: 150px;
     }
 }
 @media only screen and (max-width: 320px) {

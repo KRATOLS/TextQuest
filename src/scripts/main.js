@@ -22,13 +22,7 @@ Vue.component('title-pages', {
 Vue.component('actions-pages', {
     props: ['actions'],
     template: `
-        <div class="choices">
-            <label
-            v-for="(item, i) in actions">
-                <input class="radio_btn" type="radio" name="action" v-bind:value="i" checked>
-                <span>{{item}}</span>
-            </label>
-        </div>
+        <div class="choices" v-html="actions"></div>
     `
 })
 
@@ -66,7 +60,8 @@ const app = new Vue({
         showReadingPage: false,
         showChoicePage: false,
         showInfoPage: false,
-        showGameOverPage: false
+        showGameOverPage: false,
+        showGameWinPage: false
     },
     methods: {
         /*Геттеры*/
@@ -75,10 +70,12 @@ const app = new Vue({
         },
         /*Методы отрисовки*/
         GetStylesForTextPages() {
-            this.stylesTextPages = this.place_styles[this.GetPlace()]['text-pages'];
+            if (this.GetPlace() in place_styles)
+                this.stylesTextPages = this.place_styles[this.GetPlace()]['text-pages'];
         },
         GetStylesForTitlePages() {
-            this.stylesTitlePages = this.place_styles[this.GetPlace()]['title-pages'];
+            if (this.GetPlace() in place_styles)
+                this.stylesTitlePages = this.place_styles[this.GetPlace()]['title-pages'];
         },
         ChangeSkillPoints(allowChange, skill, freePoints) {
             if(eval(allowChange)) {
@@ -115,6 +112,7 @@ const app = new Vue({
             this.showInfoPage = false;
             this.showGameOverPage = false;
             this.showReadingPage = false;
+            this.showGameWinPage = false;
         },
         GoToReadingPage() {
             this.showCreatingChar = false;
@@ -149,6 +147,20 @@ const app = new Vue({
             this.showReadingPage = false;
             this.total_games++;
             this.total_class_games[this.char_properties.class_name]['Поражений']++;
+            localStorage.removeItem('data_char');
+            localStorage.removeItem('current_game');
+            localStorage.setItem('total_class_games', JSON.stringify(this.total_class_games));
+            localStorage.setItem('total_games', this.total_games);
+        },
+        GoToGameWinPage() {
+            this.showCreatingChar = false;
+            this.showMainMenu = false;
+            this.showChoicePage = false;
+            this.showInfoPage = false;
+            this.showReadingPage = false;
+            this.showGameWinPage = true;
+            this.total_games++;
+            this.total_class_games[this.char_properties.class_name]['Побед']++;
             localStorage.removeItem('data_char');
             localStorage.removeItem('current_game');
             localStorage.setItem('total_class_games', JSON.stringify(this.total_class_games));
@@ -191,7 +203,7 @@ const app = new Vue({
             this.UpdatePage();
         },
         UpdatePage() {
-            if(this.curPage != 'defeat') {
+            if(this.curPage != 'defeat' & this.curPage != 'win') {
                 this.GetStylesForTextPages();
                 this.GetStylesForTitlePages();
                 this.GetTextPage();
@@ -210,6 +222,9 @@ const app = new Vue({
                     break;
                 case 'info':
                     this.GoToInfoPage();
+                    break;
+                case 'win_game':
+                    this.GoToGameWinPage();
                     break;
                 default:
                     this.GoToGameOverPage();
@@ -247,12 +262,20 @@ const app = new Vue({
             this.textPage = texts;
         },
         GetActionsPage() {
-            let actions = [];
+            let actions = "";
+            let index = 0;
 
             for(let item of this.pages[this.curPage].actions[this.char_properties.class_name]) {
-                if((item.length > 1 && eval(item[1])) | item.length == 1) {
-                    actions.push(item[0][0]);
+                if(item.length == 1 | (item.length > 1 && eval(item[1]))) {
+                    actions += `<label><input class="radio_btn" type="radio" name="action" value="${index}" checked>
+                    <span>${item[0][0]}</span></label>`;
+                    
                 }
+                if(item.length > 1 && !eval(item[1])) {
+                    actions += `<label><input class="radio_btn" type="radio" name="action" v-bind:value="i" checked style="display:none">
+                    <span style="display:none">${item[0][0]}</span></label>`;
+                }
+                index++;
             }
             this.actionsPage = actions;
         },

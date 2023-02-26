@@ -166,7 +166,7 @@ pages = {
     },
     8:  { 
         place: {
-            rogue: 'Лес теней',
+            rogue: 'Место засады',
             mage: '',
             warrior: ''
         },
@@ -178,7 +178,7 @@ pages = {
             warrior: []
         },
         image: {
-            rogue: '1_reading.jpeg',
+            rogue: 'ambush.jpg',
             mage: '',
             warrior: ''
         },
@@ -187,7 +187,7 @@ pages = {
     },
     9: { 
         place: {
-            rogue: 'Лес теней',
+            rogue: 'Место засады',
             mage: '',
             warrior: ''
         },
@@ -201,7 +201,7 @@ pages = {
             warrior: []
         },
         image: {
-            rogue: '1_reading.jpeg',
+            rogue: 'ambush.jpg',
             mage: '',
             warrior: ''
         },
@@ -210,7 +210,7 @@ pages = {
     },
     10: {
         place: {
-            rogue: 'Лес теней',
+            rogue: 'Атака на караван',
             mage: '',
             warrior: ''
         },
@@ -232,16 +232,176 @@ pages = {
             warrior: []
         },
         image: {
-            rogue: '1_reading.jpeg',
+            rogue: 'ambush_fight.jpg',
             mage: '',
             warrior: ''
         },
         type: "choice",
     },
+    11: {
+        place: {
+            rogue: 'Атака на караван',
+            mage: '',
+            warrior: ''
+        },
+        text: {
+            rogue: [
+                ['Вы стреляете из лука, но стрела угодила прямо в латы противника, что не причинило ему абсолютно никакого вреда. Нужно срочно расправиться с ним, пока он не почувствовал своё превосходство.']
+            ],
+            mage: [],
+            warrior: []
+        },
+        actions: {
+            rogue: [
+                [['Выпад вперёд с ударом с двух рук (могущество)', 15], 'this.char_properties.power'],
+                [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
+                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard']
+            ],
+            mage: [],
+            warrior: []
+        },
+        image: {
+            rogue: 'ambush_fight.jpg',
+            mage: '',
+            warrior: ''
+        },
+        type: "choice",
+    },
+    12: {
+        place: {
+            rogue: 'Атака на караван',
+            mage: '',
+            warrior: ''
+        },
+        text: {
+            rogue: [
+                ['Вы атакуете воина в ближнем бою, но он без труда парирует все ваши атаки и едва не задевает вас на увороте. Каков ваш следующий шаг?']
+            ],
+            mage: [],
+            warrior: []
+        },
+        actions: {
+            rogue: [
+                [['Выпад вперёд с ударом с двух рук (могущество)', 15], 'this.char_properties.power'],
+                [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
+                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard'],
+                [['Выстрелить из лука', 11], '!this.events.seeGuard'],
+            ],
+            mage: [],
+            warrior: []
+        },
+        image: {
+            rogue: 'ambush_fight.jpg',
+            mage: '',
+            warrior: ''
+        },
+        type: "choice",
+    },
+    13: {
+        place: {
+            rogue: 'Лес теней',
+            mage: '',
+            warrior: ''
+        },
+        text: {
+            rogue: [
+                ['Вы замечаете, что между наплечниками и наручами воина есть открытое место, не спрятанное бронёй.']
+            ],
+            mage: [],
+            warrior: []
+        },
+        image: {
+            rogue: 'ambush_fight.jpg',
+            mage: '',
+            warrior: ''
+        },
+        type: "info",
+    },
+    14: {
+        place: {
+            rogue: 'Атака на караван',
+            mage: '',
+            warrior: ''
+        },
+        text: {
+            rogue: [
+                ['Вы стреляете из лука и попадаете воину в незащищённое бронёй место. Ваш противник ранен и вряд ли сможет держать в руках меч.']
+            ],
+            mage: [],
+            warrior: []
+        },
+        actions: {
+            rogue: [
+                [['Добить воина', 16]],
+                [['Забрать его меч и оглушить', 16]],
+            ],
+            mage: [],
+            warrior: []
+        },
+        image: {
+            rogue: 'ambush_fight.jpg',
+            mage: '',
+            warrior: ''
+        },
+        type: "choice",
+    },
+    15: {
+        place: {
+            rogue: 'Атака на караван',
+            mage: '',
+            warrior: ''
+        },
+        text: {
+            rogue: [
+                ['Вы делает резкий выпад вперёд и со всей силы рубите противника кинжалами с двух рук. Ваш противник не ожидал такого смелого приёма, и был застигнут врасплох. В результате этой атаки вы сильно порезали его правую руку, и он с криком упал наземь, выронив из рук меч.'],
+            ],
+            mage: [],
+            warrior: []
+        },
+        actions: {
+            rogue: [
+                [['Добить воина', 16]],
+                [['Забрать его меч и оглушить', 16]],
+            ],
+            mage: [],
+            warrior: []
+        },
+        image: {
+            rogue: 'ambush_fight.jpg',
+            mage: '',
+            warrior: ''
+        },
+        type: "choice",
+    },
+    16: { 
+        place: {
+            rogue: 'Атака на караван',
+            mage: '',
+            warrior: ''
+        },
+        text: {
+            rogue: [
+                ['Вы одержали победу над телохранителем и теперь ничто не мешает вам добраться до кареты.'], 
+            ],
+            mage: [],
+            warrior: []
+        },
+        image: {
+            rogue: 'ambush_fight.jpg',
+            mage: '',
+            warrior: ''
+        },
+        type: "reading",
+        next_page: 'win',
+    },
+    'win': {
+        type: "win_game"
+    },
     'defeat': {
         type: "game_over"
     }
 },
+
 events = {
     sayUnluckyAttack: false,        //Неудачная атака стр.2;
     seeGuard: false                 //Оглядеть стражника стр.10;
@@ -259,8 +419,23 @@ place_styles = {
             'color': 'white'
         },
         'title-pages': {
-            'padding-top': '30px',
             'color': 'rgb(199, 50, 50)'
+        }
+    },   
+    'Место засады': {
+        'text-pages': {
+            'color': 'white'
+        },
+        'title-pages': {
+            'color': 'black'
+        }
+    },   
+    'Атака на караван': {
+        'text-pages': {
+            'color': 'white'
+        },
+        'title-pages': {
+            'color': 'rgb(207, 50, 23)'
         }
     },   
 }

@@ -131,9 +131,8 @@
         <div class="app text__reading" v-show="showReadingPage" v-bind:style="{  
                 'background-image': 'url(src/img/'+backgroundPage+')', 'color': 'white' 
             }">
-            <title-pages :title="titlePage" :style_obj="stylesTitlePages">
-            </title-pages>
             <div class="app__inner page">
+                <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
                 <text-pages :text_array="textPage" :style_obj="stylesTextPages">
                 </text-pages>
                 <div class="switch__pages">
@@ -145,8 +144,8 @@
         <div class="app choice__actions" v-show="showChoicePage" v-bind:style="{  
                 'background-image': 'url(src/img/'+backgroundPage+')', 'color': 'white' 
             }">
-            <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
             <div class="app__inner page">
+                <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
                 <text-pages :text_array="textPage" :style_obj="stylesTextPages" class="text"></text-pages>
                 <actions-pages :actions="actionsPage"></actions-pages>
                 <div class="switch__pages">
@@ -158,8 +157,8 @@
         <div class="app info__reading" v-show="showInfoPage" v-bind:style="{  
             'background-image': 'url(src/img/'+backgroundPage+')', 'color': 'white' 
         }">
-            <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
             <div class="app__inner page">
+                <title-pages :title="titlePage" :style_obj="stylesTitlePages"></title-pages>
                 <text-pages :text_array="textPage" :style_obj="stylesTextPages"></text-pages>
                 <div class="switch__pages">
                     <button class="btn confirm" @click="PreviousPageBeforeInfo">Назад</button>
@@ -170,6 +169,16 @@
         <div class="app game__over" v-show="showGameOverPage">
             <div class="final__text">
                 <h1>ВЫ ПРОИГРАЛИ</h1>
+            </div>
+            <button class="btn" @click="GoToMainMenu">Главное меню</button>
+        </div>
+
+        <div class="app game__win" v-show="showGameWinPage">
+            <div class="win__header">
+                <h1>Победа!</h1>
+            </div>
+            <div class="win__text">
+                <p>На этом ваши приключения окончены. О ваших подвигах будут слагать легенды и никогда не угаснет память о ваших великих свершениях</p> 
             </div>
             <button class="btn" @click="GoToMainMenu">Главное меню</button>
         </div>
