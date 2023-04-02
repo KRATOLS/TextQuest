@@ -1,4 +1,4 @@
-pages = {
+export const pages = {
     1: { 
         place: {
             rogue: 'Лес теней',
@@ -39,7 +39,8 @@ pages = {
             rogue: [
                 [['Осмотреть рыцарей', 3]],
                 [['Ерунда я и один справлюсь. Атаковать караван', 4, "this.events.sayUnluckyAttack = true"]],
-                [['Бежать к своим. Нужно скорее предупредить их', 5]]
+                [['Бежать к своим. Нужно скорее предупредить их', 5]],
+                [['Осмотреть инвентарь', 'inventory']]
             ],
             mage: [],
             warrior: []
@@ -88,6 +89,7 @@ pages = {
             rogue: [
                 [['Меня не сломить! Продолжить атаку', 6]],
                 [['Чёрт, надо удирать! Бегите к своим', 5]],
+                [['Осмотреть инвентарь', 'inventory']],
             ],
             mage: [],
             warrior: []
@@ -226,7 +228,8 @@ pages = {
                 [['Выстрелить из лука', 11], '!this.events.seeGuard'],
                 [['Атаковать парными кинжалами', 12]],
                 [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
-                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard']
+                [['Осмотреть инвентарь', 'inventory']],
+                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard'],
             ],
             mage: [],
             warrior: []
@@ -253,9 +256,10 @@ pages = {
         },
         actions: {
             rogue: [
-                [['Выпад вперёд с ударом с двух рук (могущество)', 15], 'this.char_properties.power'],
                 [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
-                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard']
+                [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard'],
+                [['Осмотреть инвентарь', 'inventory']],
+                [['Выпад вперёд с ударом с двух рук (могущество)', 15], 'this.char_properties.power > 3'],
             ],
             mage: [],
             warrior: []
@@ -282,10 +286,11 @@ pages = {
         },
         actions: {
             rogue: [
-                [['Выпад вперёд с ударом с двух рук (могущество)', 15], 'this.char_properties.power'],
-                [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
                 [['Выстрелить в незакрытое место', 14], 'this.events.seeGuard'],
+                [['Оглядеть противника', 13, 'this.events.seeGuard = true']],
                 [['Выстрелить из лука', 11], '!this.events.seeGuard'],
+                [['Осмотреть инвентарь', 'inventory']],
+                [['Выпад вперёд с ударом с двух рук (могущество)', 15], 'this.char_properties.power'],
             ],
             mage: [],
             warrior: []
@@ -333,7 +338,8 @@ pages = {
         actions: {
             rogue: [
                 [['Добить воина', 16]],
-                [['Забрать его меч и оглушить', 16]],
+                [['Забрать его меч и оглушить', 16, 'this.AddWeapon(weapons.HeavyAxe)']],
+                [['Осмотреть инвентарь', 'inventory']],
             ],
             mage: [],
             warrior: []
@@ -361,7 +367,8 @@ pages = {
         actions: {
             rogue: [
                 [['Добить воина', 16]],
-                [['Забрать его меч и оглушить', 16]],
+                [['Забрать его меч и оглушить', 16, 'this.AddWeapon(weapons.HeavyAxe)']],
+                [['Осмотреть инвентарь', 'inventory']],
             ],
             mage: [],
             warrior: []
@@ -394,26 +401,29 @@ pages = {
         type: "reading",
         next_page: 'win',
     },
-    'win': {
+    win: {
         type: "win_game"
     },
-    'defeat': {
+    defeat: {
         type: "game_over"
+    },
+    inventory: {
+        type: "inventory_page"
     }
-},
+}
 
-events = {
+export const events = {
     sayUnluckyAttack: false,        //Неудачная атака стр.2;
     seeGuard: false                 //Оглядеть стражника стр.10;
 }
 
-class_description = {
+export const class_description = {
     warrior: 'Мастер владения оружием ближнего боя. Имеет повышенную выносливость и устойчивость к физическому урону',
     rogue: 'Профессионально владеет оружием дальнего боя. Имеет способность взламывать замки и устойчивость к ядам',
     mage: 'Знаток магических искусств. Использует силы стихий для обороны и нападения. Имеет дар к убеждению'
 }
 
-place_styles = {
+export const place_styles = {
     'Лес теней': {
         'text-pages': {
             'color': 'white'
@@ -438,4 +448,27 @@ place_styles = {
             'color': 'rgb(207, 50, 23)'
         }
     },   
+}
+export const weapons = {
+    HeavyAxe: {
+        name: 'Тяжёлый топор',
+        description: "Топор, добытый вами в битве с головорезами Аукенайских пещер. Выполнен далеко не самым искусным образом, зато имеет внушиетельный размер.",
+        properties_desc: ['+1 К могуществу'],
+        properties: ['this.char_properties.power++'],
+        image: 'src/img/axe_1.JPG'
+    },
+    SimpleArch: {
+        name: 'Простой лук',
+        description: "Простой, изготовленный на скорую руку лук.",
+        properties_desc: null,
+        properties: null,
+        image: 'src/img/arch.jpg'
+    },
+    LightDoubleSwords: {
+        name: 'Лёгкие парные кинжалы',
+        description: 'Парные кинжалы - излюбленное оружие любого уважающего себя разбойника.',
+        properties_desc: null,
+        properties: null,
+        image: 'src/img/sword.jpg'
+    }
 }

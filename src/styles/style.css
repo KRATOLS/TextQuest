@@ -213,6 +213,78 @@ body {
     height: 50px;
     background-color: red;
 }
+/*Инветнать*/
+.app__inner.inventory {
+    height: 100%;
+    align-items: center;
+}
+.app.inventory {
+    background-image: url("../img/bgr_creating.jpg");
+}
+.inventory__header {
+    text-align: center;
+    font-size: 30px;
+}
+.inventory__grid {
+    display: grid;
+    gap: 2px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border: rgb(230, 210, 36) solid;
+    border-width: 4px;
+}
+.inventory__grid__item {
+    background-color: #646262;
+    height: 200px;
+    width: 200px;
+    border: rgb(230, 210, 36) solid;
+}
+.inventory__grid__item.busy img{
+    width: 100%;
+    height: 100%;
+}
+.inventory .btn {
+    width: 140px;
+}
+/* внешний вид меню */
+.context-menu {
+	/* настройки шрифта */
+  font-family: sans-serif;
+	/* устанавливаем абсолютное позиционирование */
+  position: absolute; 
+  /* не показываем меню с самого начала */
+  /*display: none;*/ 
+  /* цвет фона и настройки рамки вокруг меню */
+  background-color: #fff; 
+  border: 1px solid #333; 
+  padding: 5px;
+
+  /* Добавим тени */
+  -moz-box-shadow: 5px 2px 10px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: 5px 2px 10px rgba(0,0,0,0.5); 
+  box-shadow: 5px 2px 10px rgba(0,0,0,0.5); 
+
+}
+/* общий стиль для списка */
+.context-menu ul { list-style: none; margin: 0; padding: 0; }
+
+/* стиль отдельных элементов */
+.context-menu ul li { margin: 0; padding: 0; background-color: #fff; display: block; }
+
+/* стиль ссылок в меню */
+.context-menu ul li a { color: #333; text-decoration: none; font-size: 12px; display: block; padding: 5px; }
+
+/* меняем фон в пункте меню при наведении мыши */
+.context-menu ul li a:hover { background-color: #eee; }
+
+/*Модальное окно в инвентаре*/
+.inventory .hystmodal__window {
+    text-align: center;
+}
+.inventory .hystmodal__window p{
+    font-size: 20px;
+}
+
 
 
 /*Медиа запросы*/
@@ -271,6 +343,12 @@ body {
     }
 }
 /*Ширина*/
+@media only screen and (max-width: 760px) {
+    .inventory__grid__item { 
+        height: 200px;
+        width: 200px;
+    }
+}
 @media only screen and (max-width: 640px) {
     /* .main__menu {
         background-position: 25% 100%;
@@ -283,6 +361,10 @@ body {
     }
     .text_part{
         font-size: 22px;
+    }
+    .inventory__grid__item { 
+        height: 150px;
+        width: 150px;
     }
 }
 @media only screen and (max-width: 540px) {
@@ -298,6 +380,10 @@ body {
     .game__win {
         font-size: 30px;
     }
+    .inventory__grid__item { 
+        height: 120px;
+        width: 120px;
+    }
 }
 @media only screen and (max-width: 375px) {
     .choices {
@@ -309,6 +395,9 @@ body {
     .app__header {
         font-size: 14px;
     }
+    .inventory__header {
+        font-size: 16px;
+    }
     .final__text {
         font-size: 16px;
     }
@@ -317,6 +406,10 @@ body {
     }
     .game__win .btn {
         width: 150px;
+    }
+    .inventory__grid__item { 
+        height: 90px;
+        width: 90px;
     }
 }
 @media only screen and (max-width: 320px) {
@@ -328,5 +421,12 @@ body {
     }
     .app__header {
         font-size: 12px;
+    }
+    .inventory__header {
+        font-size: 16px;
+    }
+    .inventory__grid__item { 
+        height: 80px;
+        width: 80px;
     }
 }

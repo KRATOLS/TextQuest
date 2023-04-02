@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/styles/style.css">
     <link rel="stylesheet" href="src/styles/font-awesome.min.css">
+    <link rel="stylesheet" href="src/styles/hystmodal.min.css">
+    <link rel="stylesheet" href="src/styles/style.css">
     <title>Текстовый квест</title>
 </head>
 
@@ -18,7 +19,7 @@
                 <h1>Gothic Quest</h1>
             </div>
             <div class="app__inner">
-                <button class="btn menu_btn" v-show="curPage>0" @click="UpdatePage">
+                <button class="btn menu_btn" v-show="curPage>0" @click="ContinueGame">
                     <p>Продолжить</p>
                 </button>
                 <button class="btn menu_btn" @click="GoToCreating">
@@ -183,11 +184,33 @@
             <button class="btn" @click="GoToMainMenu">Главное меню</button>
         </div>
 
+        <div class="app inventory" v-show="showInventory">
+            <div class="hystmodal" id="myModal" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true">
+                        <button data-hystclose class="hystmodal__close">Закрыть</button>
+                        <item-info :item="selectedItem"></item-info>
+                    </div>
+                </div>
+            </div>
+            <div class="app__inner inventory">
+                <div class="inventory__header">
+                    <h1>Инвентарь</h1>
+                </div>
+                <inventory-pages :inventory="inventoryPage"></inventory-pages>
+                <div class="switch__pages">
+                    <button class="btn confirm" @click="PreviousPageBeforeInfo">Назад</button>
+                </div>
+            </div>
+        </div>
+
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="src/scripts/vue.js"></script>
-    <script src="src/scripts/const.js"></script>
-    <script src="src/scripts/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+    <script type="module" src="src/scripts/const.js"></script>
+    <script type="module" src="src/scripts/main.js"></script>
+    <script src="src/scripts/hystmodal.min.js"></script>
 </body>
 
 </html>
