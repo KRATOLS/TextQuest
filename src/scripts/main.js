@@ -381,6 +381,7 @@ const app = new Vue({
             if(this.char_properties.class_name == 'rogue') {
                 this.inventory[0] = weapons.SimpleArch;
                 this.inventory[1] = weapons.LightDoubleSwords;
+                this.SaveInventoryItems();
             }
         },
         /*Заполняем инвентарь иконками*/
