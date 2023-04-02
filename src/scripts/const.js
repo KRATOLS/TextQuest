@@ -462,13 +462,13 @@ export const weapons = {
         description: "Простой, изготовленный на скорую руку лук.",
         properties_desc: null,
         properties: null,
-        image: 'src/img/arch.jpg'
+        image: 'src/img/arch.JPG'
     },
     LightDoubleSwords: {
         name: 'Лёгкие парные кинжалы',
         description: 'Парные кинжалы - излюбленное оружие любого уважающего себя разбойника.',
         properties_desc: null,
         properties: null,
-        image: 'src/img/sword.jpg'
+        image: 'src/img/sword.JPG'
     }
 }
